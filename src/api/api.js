@@ -52,6 +52,14 @@ class Api {
         return await this.save()
     }
 
+    delete = async (created) => {
+        const id = this.find(created)
+
+        this.list.splice(id, 1)
+
+        return await this.save()
+    }
+
     save = () => {
         return this.storage.storeData(this.key, this.list)
     }
