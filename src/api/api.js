@@ -34,7 +34,7 @@ class Api {
             created: `${Date.now()}`
         })
 
-        this.save()
+        return await this.save()
     }
 
     find = (created) => {
@@ -44,16 +44,16 @@ class Api {
         });
     }
 
-    put = (field, val, created) => {
+    put = async (field, val, created) => {
         const id = this.find(created)
 
         this.list[id][field] = val
 
-        this.save()
+        return await this.save()
     }
 
     save = () => {
-        return await this.storage.storeData(this.key, this.list)
+        return this.storage.storeData(this.key, this.list)
     }
 }
 
