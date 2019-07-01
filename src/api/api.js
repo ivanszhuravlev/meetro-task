@@ -1,25 +1,59 @@
 import {taskList} from '../model/model'
+import StorageApi from './storageApi'
 
 class Api {
 
-    constructor (
+    constructor () {
+        this.key = 'tasks'
+        this.storage = new StorageApi()
+        this.setInitialList()
+    }
 
-    )
+    setInitialList = () => {
+        this.storage.getData(this.key)
+            .then((data) => {
+                if (data == null)
+                    this.list = taskList
+                else
+                    this.list = data
+            })
+    }
 
     get = (id = null) => {
         if (id == null)
-            return taskList
+            return this.list
         else
-            return taskList[id - 1]
+            return this.list[id]
     }
 
-    post = () => {
-        taskList.push({
-            name: `Name ${taskList.length + 1}`,
+    post = async () => {
+        this.list.push({
+            name: `Name ${this.list.length + 1}`,
             type: '',
             description: '',
             created: `${Date.now()}`
         })
+
+        this.save()
+    }
+
+    find = (created) => {
+        this.list.forEach((item, index) => {
+            if (item.created == created)
+                return index
+        });
+    }
+
+    put = (field, val, created) => {
+        const id = this.find(created)
+
+        this.list[id][field] = val
+
+        this.save()
+    }
+
+    save = () => {
+        return await this.storage.storeData(this.key, this.list)
     }
 }
 
