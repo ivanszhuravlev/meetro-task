@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import Card from '../Card/Card'
+import Heading from '../Heading/Heading';
+import CloseButton from '../CloseButton/CloseButton';
+import Description from '../Description/Description';
 
 export class Task extends Component {
     render() {
@@ -9,8 +12,9 @@ export class Task extends Component {
             <Card
                 first={index == 0}
             >
-                <Text>{item.name}</Text>
-                <Text>{item.description}</Text>
+                <CloseButton item={item} index={index} />
+                <Heading item={item} />
+                <Description item={item} index={index} />
             </Card>
         )
     }
