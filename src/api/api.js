@@ -1,13 +1,15 @@
 import {taskList} from '../model/model'
 import StorageApi from './storageApi'
+import { observable } from 'mobx'
 
 class Api {
 
-    constructor ({storage, key, list}) {
+    constructor ({key, list}) {
         this.key = key
-        this.storage = storage
         this.list = list
     }
+
+    @observable list = []
     
     static build = async () => {
         let initData = await this.setInitialList()
@@ -15,21 +17,29 @@ class Api {
     }
 
     static setInitialList = async() => {
-        const storage = new StorageApi(),
-            key = 'tasks',
-            data = await storage.getData(key)
+        const key = 'tasks',
+            data = await StorageApi.getData(key)
         let list = {}
-        
+
         if (data == null)
             list = taskList
         else
             list = data
-        return {storage, key, list}
+        return {key, list}
     }
 
     get = (id = null) => {
         if (id == null)
             return this.list
+                .filter(item => true)
+                .map(item => {
+                    return {
+                        name: item.name,
+                        type: item.type,
+                        type: item.description,
+                        type: item.created,
+                    }
+                })
         else
             return this.list[id]
     }
@@ -68,9 +78,16 @@ class Api {
         return await this.save()
     }
 
-    save = () => {
-        return this.storage.storeData(this.key, this.list)
+    save = async () => {
+        try {
+            return StorageApi.storeData(this.key, this.get())
+        } catch(e) {
+            console.log(e)
+            return null
+        }
     }
 }
 
-export default Api
+const api = Api.build();
+
+export default api

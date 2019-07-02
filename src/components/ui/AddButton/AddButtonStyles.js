@@ -16,6 +16,7 @@ export default styles = StyleSheet.create({
         height: 64,
 
         backgroundColor: '#bc556a',
-        borderRadius: 32
+        borderRadius: 32,
+        elevation: 5,
     }
 })
