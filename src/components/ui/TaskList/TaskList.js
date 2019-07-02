@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Text, View, FlatList } from 'react-native'
 import Api from '../../../api/api'
-
+import Task from '../Task/Task'
+import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view'
+import styles from './TaskListStyles'
 export class TaskList extends Component {
 
     constructor(props) {
@@ -33,11 +35,20 @@ export class TaskList extends Component {
 
     render() {
         const {list} = this.state
-        console.log(list)
         return (
-            <FlatList
+            <KeyboardAwareFlatList
                 data={list}
-                renderItem={({ item }) => <Text>{item.name}</Text>}
+                renderItem={
+                    ({ item, index }) => 
+                        <Task 
+                            item={item} 
+                            key={item.created} 
+                            index={index}
+                        />
+                }
+                style={styles.scrollView}
+                extraScrollHeight={-80}
+                enableOnAndroid={true}
             />
         )
     }

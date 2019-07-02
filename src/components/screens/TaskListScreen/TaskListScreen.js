@@ -12,7 +12,7 @@ class TaskListScreen extends Component {
 
 	render() {
 		return (
-			<View>
+			<View style={styles.activity}>
 				<Text> TaskListScreen </Text>
 				<TaskList />
 			</View>
