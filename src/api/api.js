@@ -3,20 +3,28 @@ import StorageApi from './storageApi'
 
 class Api {
 
-    constructor () {
-        this.key = 'tasks'
-        this.storage = new StorageApi()
-        this.setInitialList()
+    constructor ({storage, key, list}) {
+        this.key = key
+        this.storage = storage
+        this.list = list
+    }
+    
+    static build = async () => {
+        let initData = await this.setInitialList()
+        return new Api(initData)
     }
 
-    setInitialList = () => {
-        this.storage.getData(this.key)
-            .then((data) => {
-                if (data == null)
-                    this.list = taskList
-                else
-                    this.list = data
-            })
+    static setInitialList = async() => {
+        const storage = new StorageApi(),
+            key = 'tasks',
+            data = await storage.getData(key)
+        let list = {}
+        
+        if (data == null)
+            list = taskList
+        else
+            list = data
+        return {storage, key, list}
     }
 
     get = (id = null) => {
