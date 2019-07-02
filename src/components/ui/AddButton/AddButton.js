@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { TouchableOpacity } from 'react-native'
 import styles from './AddButtonStyles'
 import Icon from 'react-native-vector-icons/AntDesign'
-import Api from '../../../api/api'
 
 class AddButton extends Component {
     pressCallback = () => {

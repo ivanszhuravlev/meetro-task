@@ -24,7 +24,7 @@ class Api {
         if (data == null)
             list = taskList
         else
-            list = data
+            list = JSON.parse(data)
         return {key, list}
     }
 
@@ -36,51 +36,53 @@ class Api {
                     return {
                         name: item.name,
                         type: item.type,
-                        type: item.description,
-                        type: item.created,
+                        description: item.description,
+                        created: item.created,
                     }
                 })
         else
             return this.list[id]
     }
 
-    post = async () => {
+    post = () => {
         this.list.push({
             name: `Name ${this.list.length + 1}`,
             type: '',
             description: '',
-            created: `${Date.now()}`
+            created: `${Date.now()}`,
         })
 
-        return await this.save()
+        this.save()
     }
 
     find = (created) => {
-        this.list.forEach((item, index) => {
-            if (item.created == created)
-                return index
+        const index = this.list.some((item, i) => {
+            if (item.created == created) {
+                return i
+            }
         });
+
+        return index
     }
 
-    put = async (field, val, created) => {
+    put = (field, val, created) => {
         const id = this.find(created)
 
         this.list[id][field] = val
 
-        return await this.save()
+        this.save()
     }
 
-    delete = async (created) => {
+    delete = (created) => {
         const id = this.find(created)
-
         this.list.splice(id, 1)
 
-        return await this.save()
+        this.save()
     }
 
-    save = async () => {
+    save = () => {
         try {
-            return StorageApi.storeData(this.key, this.get())
+            StorageApi.storeData(this.key, this.get())
         } catch(e) {
             console.log(e)
             return null

@@ -12,8 +12,7 @@ class StorageApi {
 
     static storeData = async (key, val) => {
         try {
-            await AsyncStorage.setItem(key, val)
-            return await this.getData(key) 
+            await AsyncStorage.setItem(key, JSON.stringify(val))
         } catch (e) {
             console.log(e)            
         }

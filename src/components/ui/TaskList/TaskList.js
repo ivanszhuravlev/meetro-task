@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Text, View, FlatList } from 'react-native'
-// import Api from '../../../api/api'
 import Task from '../Task/Task'
 import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view'
 import styles from './TaskListStyles'
@@ -12,12 +11,13 @@ class TaskList extends Component {
         return this.props.store && (
             <KeyboardAwareFlatList
                 data={this.props.store.get()}
+                keyExtractor={item => item.created}
                 renderItem={
                     ({ item, index }) => 
                         <Task 
                             item={item} 
-                            key={item.created} 
                             index={index}
+                            store={this.props.store}
                         />
                 }
                 style={styles.scrollView}

@@ -4,16 +4,15 @@ import styles from './CloseButtonStyles'
 import Icon from 'react-native-vector-icons/AntDesign'
 
 class CloseButton extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
+    pressCallback = () => {
+        if (this.props.store) {
+            this.props.store.delete(this.props.item.created)
+        }
     }
 
     render() {
-        const {item} = this.props
         return (
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={this.pressCallback}>
                 <Icon name="close" style={styles.icon} />
             </TouchableOpacity>
         );
