@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import Card from '../Card/Card'
 import Heading from '../Heading/Heading';
-import CloseButton from '../CloseButton/CloseButton';
+import DeleteButton from '../DeleteButton/DeleteButton';
 import Description from '../Description/Description';
 
 export class Task extends Component {
@@ -12,9 +12,9 @@ export class Task extends Component {
             <Card
                 first={index == 0}
             >
-                <CloseButton item={item} index={index} store={store} />
+                <DeleteButton item={item} index={index} store={store} />
                 <Heading item={item} store={store}/>
-                <Description item={item} index={index} />
+                <Description item={item} store={store}/>
             </Card>
         )
     }

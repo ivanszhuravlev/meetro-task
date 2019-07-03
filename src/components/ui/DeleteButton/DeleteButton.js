@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { TouchableOpacity } from 'react-native'
-import styles from './CloseButtonStyles'
+import styles from './DeleteButtonStyles'
 import Icon from 'react-native-vector-icons/AntDesign'
 
-class CloseButton extends Component {
+class DeleteButton extends Component {
     pressCallback = () => {
-        this.props.handleClosePress()
+        if (this.props.store) {
+            this.props.store.delete(this.props.item.created)
+        }
     }
 
     render() {
@@ -17,4 +19,4 @@ class CloseButton extends Component {
     }
 }
 
-export default CloseButton;
+export default DeleteButton;

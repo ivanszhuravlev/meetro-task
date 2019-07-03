@@ -12,7 +12,7 @@ export default styles = StyleSheet.create({
         shadowOpacity: 0.48,
         shadowRadius: 11.95,
         elevation: 10,
-        borderRadius: 8,
+        borderRadius: 7,
         marginBottom: 16,
         marginTop: 16,
         marginHorizontal: 16,

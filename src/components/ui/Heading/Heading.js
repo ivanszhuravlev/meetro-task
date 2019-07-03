@@ -22,7 +22,6 @@ class Heading extends Component {
     }
 
     render() {
-        const { item } = this.props
         const { value } = this.state
         return (
             <TextInput
