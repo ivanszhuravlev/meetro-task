@@ -2,8 +2,6 @@ import { StyleSheet } from 'react-native'
 
 export default styles = StyleSheet.create({
     scrollView: {
-        paddingTop: 0,
-        paddingHorizontal: 0,
         backgroundColor: 'rgba(0,0,0,0)',
         position: 'absolute',
         top: 0,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import TaskListScreen from './src/components/screens/TaskListScreen/TaskListScreen'
 import api from './src/api/api'
 

@@ -56,8 +56,10 @@ class Api {
     }
 
     find = (created) => {
-        const index = this.list.some((item, i) => {
+        let index = 0
+        this.list.some((item, i) => {
             if (item.created == created) {
+                index = i
                 return i
             }
         });

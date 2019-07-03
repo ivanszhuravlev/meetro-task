@@ -13,7 +13,7 @@ export class Task extends Component {
                 first={index == 0}
             >
                 <CloseButton item={item} index={index} store={store} />
-                <Heading item={item} />
+                <Heading item={item} store={store}/>
                 <Description item={item} index={index} />
             </Card>
         )

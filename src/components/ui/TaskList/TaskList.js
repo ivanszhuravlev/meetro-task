@@ -21,8 +21,9 @@ class TaskList extends Component {
                         />
                 }
                 style={styles.scrollView}
-                extraScrollHeight={-80}
+                extraHeight={60}
                 enableOnAndroid={true}
+                enableAutomaticScroll={true}
             />
         )
     }
